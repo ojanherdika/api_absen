@@ -1,0 +1,18 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Test API komodo",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/tambahDataAbsensi": {
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                }
+            }
+        }
+    }
+}
