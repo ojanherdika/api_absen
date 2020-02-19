@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Karyawan;
 use App\Models\User;
+use App\Models\Company;
 use Illuminate\Support\Str;
 use Ramsey\Uuid\Uuid;
 use Carbon\Carbon;
@@ -50,9 +51,28 @@ class C_User extends Controller
             'created_date'=> Carbon::now()->toDateString('created_date'),
             'status'=> $request->get('status')
         ]);
+        $id_karyawan=Str::uuid()->toString('id_karyawan');
         Karyawan::create([
-            'id_karyawan'=>Str::uuid()->toString('id_karyawan'),
+            'id_karyawan'=>$id_karyawan,
             'id_user'=>$id_user
+        ]);
+        $id_company=Str::uuid()->toString('id_company');
+        Company::create([
+            'id_company'=>$id_company,
+            'id_karyawan'=>$id_karyawan
+        ]);
+        $id_branch=Str::uuid()->toString('id_branch');
+        Branch::create([
+            'id_branch'=>$id_branch,
+            'id_company'=>$id_company,
+            'id_karyawan'=>$id_karyawan
+        ]);
+        $id_departement=Str::uuid()->toString('id_departement');
+        Departement::create([
+            'id_departement'=>$id_departement,
+            'id_company'=>$id_company,
+            'id_branch'=>$id_branch,
+            'id_karyawan'=>$id_karyawan
         ]);
         $data = 
         [
@@ -168,15 +188,4 @@ class C_User extends Controller
         	'code' => 404,
         	'hasil' => null
         ], 404);}
-        public function login (Request $request){
-            $validator=Validator::make($request->all(),[
-                'email'=>'required|string',
-                'password'=>'required|string'
-            ],Message::validate());
-            if ($validator->fails()) {
-                return response()->json([
-                    'message'=>'Gagal Login'
-                ],404);
-            }
-        }
 }
