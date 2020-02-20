@@ -11,14 +11,15 @@ use Illuminate\Http\Request;
 class C_Karyawan extends Controller
 {
 	public function index(){
-    	$data = 
-    	['status' => true,
-         'message' => 'Data Ditemukan',
-         'code' => 200,
-         'hasil' => Karyawan::all()];
+        $data = [
+            'status' => true,
+            'message' => 'Data Ditemukan',
+            'code' => 200,
+            'hasil' => Karyawan::all()
+        ];
 
         return [
-        	'data'=> $data
+            'data'=> $data
         ];}
 
     public function view($id_karyawan){
@@ -29,12 +30,12 @@ class C_Karyawan extends Controller
             ]);
         }
 
-        $data = 
-    	['status' => true,
-         'message' => 'Data Ditemukan',
-         'code' => 200,
-         'hasil' => $post];
-
+        $data = [
+            'status' => true,
+            'message' => 'Data Ditemukan',
+            'code' => 200,
+            'hasil' => $post
+        ];
         return [
             'data' => $data
         ];}
@@ -45,12 +46,12 @@ class C_Karyawan extends Controller
     if ($post) {
         $post->update($request->all());
 
-        $data = 
-    	['status' => true,
-         'message' => 'Data Berhasil Diupdate',
-         'code' => 200,
-         'hasil' => $post];
-
+        $data = [
+            'status' => true,
+            'message' => 'Data Berhasil Diupdate',
+            'code' => 200,
+            'hasil' => $post
+        ];
         return response()->json([
             'data' => $data
         ]);
@@ -64,7 +65,7 @@ class C_Karyawan extends Controller
 
     //update with post
 	public function updatedata(Request $request, $id_karyawan){
-	 $this->validate($request,
+        $this->validate($request,
     [
         'nama' =>'required',
         'kehadiran' =>'required'
@@ -72,22 +73,23 @@ class C_Karyawan extends Controller
     $post = Karyawan::find($id_karyawan);
     if ($post) {
         $post->update($request->all());
-
-        $data = 
-    	['status' => true,
-         'message' => 'Data Berhasil Diupdate',
-         'code' => 200,
-         'hasil' => $post];
-
+        $data = [
+            'status' => true,
+            'message' => 'Data Berhasil Diupdate',
+            'code' => 200,
+            'hasil' => $post
+        ];
         return response()->json([
-        	'data' => $data
-        ]);}
+            'data' => $data
+        ]);
+    }
     return response()->json([
         'status' => false,
         'message' => 'Data Gagal Diupdate',
         'code' => 404,
         'hasil' => null
-    ]);}
+    ]);
+}
 
 	public function delete($id_karyawan){
         $post = Karyawan::find($id_karyawan);
@@ -95,22 +97,22 @@ class C_Karyawan extends Controller
         if ($post) {
             $post->delete();
 
-        $data = 
-    		['status' => true,
-         	 'message' => 'Data Berhasil Dihapus',
-         	 'code' => 200,
-         	 'hasil' => $post]; 
+        $data = [
+            'status' => true,
+            'message' => 'Data Berhasil Dihapus',
+            'code' => 200,
+            'hasil' => $post]; 
             return response()->json([
-        		'data' => $data
+                'data' => $data
             ]);
         }
-
         return response()->json([
             'status' => false,
-        	'message' => 'Data Gagal Dihapus',
-        	'code' => 404,
-        	'hasil' => null
-        ], 404);}
+            'message' => 'Data Gagal Dihapus',
+            'code' => 404,
+            'hasil' => null
+        ], 404);
+    }
 
 }
 

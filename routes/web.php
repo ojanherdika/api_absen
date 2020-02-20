@@ -20,6 +20,7 @@ $router->get('/key', function() {
 
 //LOGIN USER
 $router->post('auth/login','AuthController@loginPost');
+
 $router->group(
     ['middleware' => 'auth'], 
     function() use ($router) {

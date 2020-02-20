@@ -12,15 +12,16 @@ use Illuminate\Http\Request;
 class C_Absensi extends Controller
 {
 	public function index(){
-    	$data = 
-    	['status' => true,
-         'message' => 'Data Ditemukan',
-         'code' => 200,
-         'hasil' => Absensi::all()];
-
+        $data = [
+            'status' => true,
+            'message' => 'Data Ditemukan',
+            'code' => 200,
+            'hasil' => Absensi::all()
+        ];
         return [
-        	'data'=> $data
-        ];}
+            'data'=> $data
+        ];
+    }
 
     public function inputdata(Request $request ) {
         $this->validate($request, [
@@ -64,12 +65,12 @@ class C_Absensi extends Controller
             'leave_reason'=>$request->get('leave_reason')
         ]);
         
-        $data = 
-    	['status' => true,
-         'message' => 'Berhasil Ditambahkan',
-         'code' => 200,
-         'hasil' => $inputan];
-
+        $data = [
+            'status' => true,
+            'message' => 'Berhasil Ditambahkan',
+            'code' => 200,
+            'hasil' => $inputan
+        ];
         return [
             'data' => $data
         ];
@@ -89,16 +90,15 @@ class C_Absensi extends Controller
                 'leave_reason'=>$request->get('leave_reason')
             ]);
         }
-        $data = 
-    	['status' => true,
-         'message' => 'Berhasil Checkout',
-         'code' => 200,
-         'hasil' => $post];
-
+        $data = [
+            'status' => true,
+            'message' => 'Berhasil Checkout',
+            'code' => 200,
+            'hasil' => $post
+        ];
         return [
             'data' => $data
         ];
-
     }
 
     public function view($id_absensi){
@@ -109,28 +109,28 @@ class C_Absensi extends Controller
             ]);
         }
 
-        $data = 
-    	['status' => true,
-         'message' => 'Data Ditemukan',
-         'code' => 200,
-         'hasil' => $post];
-
+        $data = [
+            'status' => true,
+            'message' => 'Data Ditemukan',
+            'code' => 200,
+            'hasil' => $post
+        ];
         return [
             'data' => $data
-        ];}
+        ];
+    }
 
     public function update(Request $request, $id_absensi){
     
     $post = Absensi::find($id_absensi);
     if ($post) {
         $post->update($request->all());
-
-        $data = 
-    	['status' => true,
-         'message' => 'Data Berhasil Diupdate',
-         'code' => 200,
-         'hasil' => $post];
-
+        $data = [
+            'status' => true,
+            'message' => 'Data Berhasil Diupdate',
+            'code' => 200,
+            'hasil' => $post
+        ];
         return response()->json([
             'data' => $data
         ]);
@@ -144,7 +144,7 @@ class C_Absensi extends Controller
 
     //update with post
 	public function updatedata(Request $request, $id_absensi){
-	 $this->validate($request,
+        $this->validate($request,
     [
         'nama' =>'required',
         'kehadiran' =>'required'
@@ -153,21 +153,23 @@ class C_Absensi extends Controller
     if ($post) {
         $post->update($request->all());
 
-        $data = 
-    	['status' => true,
-         'message' => 'Data Berhasil Diupdate',
-         'code' => 200,
-         'hasil' => $post];
-
+        $data = [
+            'status' => true,
+            'message' => 'Data Berhasil Diupdate',
+            'code' => 200,
+            'hasil' => $post
+        ];
         return response()->json([
-        	'data' => $data
-        ]);}
+            'data' => $data
+        ]);
+    }
     return response()->json([
         'status' => false,
         'message' => 'Data Gagal Diupdate',
         'code' => 404,
         'hasil' => null
-    ]);}
+    ]);
+}
 
 	public function delete($id_absensi){
         $post = Absensi::find($id_absensi);
@@ -175,21 +177,23 @@ class C_Absensi extends Controller
         if ($post) {
             $post->delete();
 
-        $data = 
-    		['status' => true,
-         	 'message' => 'Data Berhasil Dihapus',
-         	 'code' => 200,
-         	 'hasil' => $post]; 
-            return response()->json([
-        		'data' => $data
-            ]);
+        $data = [
+            'status' => true,
+            'message' => 'Data Berhasil Dihapus',
+            'code' => 200,
+            'hasil' => $post
+        ]; 
+        return response()->json([
+            'data' => $data
+        ]);
         }
 
         return response()->json([
             'status' => false,
-        	'message' => 'Data Gagal Dihapus',
-        	'code' => 404,
-        	'hasil' => null
-        ], 404);}
+            'message' => 'Data Gagal Dihapus',
+            'code' => 404,
+            'hasil' => null
+        ], 404);
+    }
 
 }

@@ -100,14 +100,12 @@ class C_User extends Controller
             'created_date'=> Carbon::now()->toDateString('created_date'),
             'status'=> $request->get('status')
         ]);
-
         $data = [
             'status' => true,
             'message' => 'Data Berhasil Diupdate',
             'code' => 200,
             'hasil' => $post
         ];
-
         return response()->json([
             'data' => $data
         ]);

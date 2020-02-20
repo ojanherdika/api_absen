@@ -45,12 +45,12 @@ class C_Branch extends Controller
             'created_time'=> Carbon::now()->format('H:i:s')
         ]);
         
-        $data = 
-    	['status' => true,
-         'message' => 'Berhasil Ditambahkan',
-         'code' => 200,
-         'hasil' => $inputan];
-
+        $data = [
+            'status' => true,
+            'message' => 'Berhasil Ditambahkan',
+            'code' => 200,
+            'hasil' => $inputan
+        ];
         return [
             'data' => $data
         ];
