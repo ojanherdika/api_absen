@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Karyawan;
 use App\Models\User;
+use App\Models\Branch;
+use App\Models\Departement;
 use App\Models\Company;
 use Illuminate\Support\Str;
 use Ramsey\Uuid\Uuid;
@@ -23,7 +25,6 @@ class C_User extends Controller
             'code' => 200,       
             'hasil' => User::all()
         ];
-
         return [
             'data'=> $data
         ];
@@ -32,7 +33,7 @@ class C_User extends Controller
     public function inputdata(Request $request) {
         $this->validate($request, [
             // 'id_user' => 'required',
-            'nama'=> 'required', 
+            'username'=> 'required', 
             'email'=> 'required',
             'password'=> 'required',
             // 'role'=> 'required',
@@ -43,7 +44,7 @@ class C_User extends Controller
         $id_user=Str::uuid()->toString('id_user');
         $inputan = User::create([
             'id_user'=>$id_user,
-            'nama'=> $request->get('nama'), 
+            'username'=> $request->get('username'), 
             'email'=> $request->get('email'),
             'password'=> Hash::make($request->get('password')),
             'role'=> $request->get('role'),
@@ -56,24 +57,6 @@ class C_User extends Controller
             'id_karyawan'=>$id_karyawan,
             'id_user'=>$id_user
         ]);
-        $id_company=Str::uuid()->toString('id_company');
-        Company::create([
-            'id_company'=>$id_company,
-            'id_karyawan'=>$id_karyawan
-        ]);
-        $id_branch=Str::uuid()->toString('id_branch');
-        Branch::create([
-            'id_branch'=>$id_branch,
-            'id_company'=>$id_company,
-            'id_karyawan'=>$id_karyawan
-        ]);
-        $id_departement=Str::uuid()->toString('id_departement');
-        Departement::create([
-            'id_departement'=>$id_departement,
-            'id_company'=>$id_company,
-            'id_branch'=>$id_branch,
-            'id_karyawan'=>$id_karyawan
-        ]);
         $data = 
         [
             'status' => true,
@@ -83,8 +66,8 @@ class C_User extends Controller
         ];
         return [
             'data' => $data
-        ];}
-
+        ];
+    }
     public function view($id_user){
         $post = User::find($id_user);
         if (! $post) {
@@ -93,15 +76,16 @@ class C_User extends Controller
             ]);
         }
 
-        $data = 
-    	['status' => true,
-         'message' => 'Data Ditemukan',
-         'code' => 200,
-         'hasil' => $post];
-
+        $data = [
+            'status' => true,
+            'message' => 'Data Ditemukan',
+            'code' => 200,
+            'hasil' => $post
+        ];
         return [
             'data' => $data
-        ];}
+        ];
+    }
 
     public function update(Request $request, $id_user){
     
@@ -117,11 +101,12 @@ class C_User extends Controller
             'status'=> $request->get('status')
         ]);
 
-        $data = 
-    	['status' => true,
-         'message' => 'Data Berhasil Diupdate',
-         'code' => 200,
-         'hasil' => $post];
+        $data = [
+            'status' => true,
+            'message' => 'Data Berhasil Diupdate',
+            'code' => 200,
+            'hasil' => $post
+        ];
 
         return response()->json([
             'data' => $data
@@ -132,11 +117,12 @@ class C_User extends Controller
         'message' => 'Data Gagal Diupdate',
         'code' => 404,
         'hasil' => null
-    ]);}
+    ]);
+}
 
     //update with post
 	public function updatedata(Request $request, $id_user){
-	 $this->validate($request,
+	$this->validate($request,
     [
         'nama'=> 'required', 
         'email'=> 'required',
@@ -149,15 +135,14 @@ class C_User extends Controller
     $post = User::find($id_user);
     if ($post) {
         $post->update($request->all());
-
-        $data = 
-    	['status' => true,
-         'message' => 'Data Berhasil Diupdate',
-         'code' => 200,
-         'hasil' => $post];
-
+        $data = [
+            'status' => true,
+            'message' => 'Data Berhasil Diupdate',
+            'code' => 200,
+            'hasil' => $post
+        ];
         return response()->json([
-        	'data' => $data
+            'data' => $data
         ]);}
     return response()->json([
         'status' => false,
@@ -168,24 +153,22 @@ class C_User extends Controller
 
 	public function delete($id_user){
         $post = User::find($id_user);
-
         if ($post) {
             $post->delete();
-
-        $data = 
-    		['status' => true,
-         	 'message' => 'Data Berhasil Dihapus',
-         	 'code' => 200,
-         	 'hasil' => $post]; 
+        $data = [
+            'status' => true,
+            'message' => 'Data Berhasil Dihapus',
+            'code' => 200,
+            'hasil' => $post]; 
             return response()->json([
-        		'data' => $data
+                'data' => $data
             ]);
         }
-
         return response()->json([
             'status' => false,
-        	'message' => 'Data Gagal Dihapus',
-        	'code' => 404,
-        	'hasil' => null
-        ], 404);}
+            'message' => 'Data Gagal Dihapus',
+            'code' => 404,
+            'hasil' => null
+        ], 404);
+    }
 }

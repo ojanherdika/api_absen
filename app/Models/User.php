@@ -12,10 +12,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 {
     use Authenticatable, Authorizable;
     protected $primaryKey='id_user';
-    protected $guarded = ['uuid'];
     protected $table = 'users';
-    protected $fillable = ['id_user','nama', 'email','password','role','created_by','created_date','status'];
+    protected $fillable = ['id_user','username', 'email','password','role','created_by','created_date','status'];
     public $incrementing = false;
+    public $timestamps = false;
     protected $hidden = [
         'password',
     ];

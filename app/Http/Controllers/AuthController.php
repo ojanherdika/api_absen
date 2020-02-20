@@ -23,10 +23,10 @@ class AuthController extends Controller
     public function loginPost(Request $request)
     {
         $this->validate($request, [
-            'email'    => 'required|email|max:255',
+            'username'    => 'required',
             'password' => 'required',
         ]);
-        if (! $token = $this->jwt->attempt($request->only('email', 'password'))) {
+        if (! $token = $this->jwt->attempt($request->only('username', 'password'))) {
             return response()->json(['user_not_found'], 404);
         }
         return response()->json(['status'=>'success','code'=>200,'result'=>compact('token')]);

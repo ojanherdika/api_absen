@@ -17,7 +17,6 @@ class AbsensiLevel extends Migration
             $table->uuid('id_absensi_level')->primary();
             $table->string('level')->nullable();
             $table->string('label')->nullable();
-            $table->timestamps();
             });
     }
 

@@ -24,7 +24,6 @@ class Absensi extends Migration
             $table->string('id_level')->nullable();
             $table->string('late_reason')->nullable();
             $table->string('leave_reason')->nullable();
-            $table->timestamps();
         });
     }
 

@@ -15,14 +15,13 @@ class User extends Migration
     {
         Schema::create('users', function (Blueprint $table){
         $table->uuid('id_user')->primary();
-        $table->string('nama')->nullable();
+        $table->string('username')->nullable();
         $table->string('email')->nullable();
         $table->string('password')->nullable();
         $table->string('role')->nullable();
         $table->string('created_by')->nullable();
         $table->date('created_date')->nullable();
         $table->integer('status')->nullable();
-        $table->timestamps();
         });
     }
 
