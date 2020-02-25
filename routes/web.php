@@ -17,7 +17,7 @@ $router->get('/', function () use ($router) {
 $router->get('/key', function() {
     return Str::random(32);
 });
-
+$router->post('/tambahDataCompany', 'C_Company@inputdata');
 //LOGIN USER
 $router->post('auth/login','AuthController@loginPost');
 
@@ -38,7 +38,7 @@ $router->group(
         $router->post('/tambahDataAbsensi', 'C_Absensi@inputdata');
         $router->post('/tambahDataUser', 'C_User@inputdata');
         $router->post('/tambahDataAbsensiLevel', 'C_Absensi_Level@inputdata');
-        $router->post('/tambahDataCompany', 'C_Company@inputdata');
+        
         $router->post('/tambahDataBranch', 'C_Branch@inputdata');
         $router->post('/tambahDataDepartement', 'C_Departement@inputdata');
         $router->put('/updateDataAbsensi/{id_absensi}','C_Absensi@update');
