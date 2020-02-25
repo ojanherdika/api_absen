@@ -10,4 +10,5 @@ class Martial extends Model
     protected $table = 'martial';
     protected $fillable = ['id_martial','martial_description'];
     public $incrementing = false;
+    public $timestamps = false;
 }

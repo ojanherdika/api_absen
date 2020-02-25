@@ -10,4 +10,5 @@ class Religion extends Model
     protected $table = 'religion';
     protected $fillable = ['id_religion','religion_description'];
     public $incrementing = false;
+    public $timestamps = false;
 }

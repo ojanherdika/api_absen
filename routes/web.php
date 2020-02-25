@@ -17,10 +17,29 @@ $router->get('/', function () use ($router) {
 $router->get('/key', function() {
     return Str::random(32);
 });
-$router->post('/tambahDataCompany', 'C_Company@inputdata');
+
 //LOGIN USER
 $router->post('auth/login','AuthController@loginPost');
-
+$router->get('/viewsDataSkill','C_Skill@index');
+$router->get('/viewDataSkill/{id_skill}','C_Skill@view');
+$router->get('/viewsDataReligion','C_Religion@index');
+$router->get('/viewDataReligion/{id_religion}','C_Religion@view');
+$router->get('/viewsDataMartial','C_Martial@index');
+$router->get('/viewDataMartial/{id_martial}','C_Martial@view');
+$router->get('/viewsDataGender','C_Gender@index');
+$router->get('/viewDataGender/{id_gender}','C_Gender@view');
+$router->post('/tambahDataSkill', 'C_Skill@inputdata');
+$router->post('/tambahDataReligion', 'C_Religion@inputdata');
+$router->post('/tambahDataMartial', 'C_Martial@inputdata');
+$router->post('/tambahDataGender', 'C_Gender@inputdata');
+$router->put('/updateDataSkill/{id_skill}','C_Skill@update');
+$router->put('/updateDataReligion/{id_religion}','C_Religion@update');
+$router->put('/updateDataMartial/{id_martial}','C_Martial@update');
+$router->put('/updateDataGender/{id_gender}','C_Gender@update');
+$router->delete('/deleteDataSkill/{id_skill}','C_Skill@delete');
+$router->delete('/deleteDataReligion/{id_religion}','C_Religion@delete');
+$router->delete('/deleteDataMartial/{id_martial}','C_Martial@delete');
+$router->delete('/deleteDataGender/{id_gender}','C_Gender@delete');
 $router->group(
     ['middleware' => 'auth'], 
     function() use ($router) {
@@ -38,7 +57,7 @@ $router->group(
         $router->post('/tambahDataAbsensi', 'C_Absensi@inputdata');
         $router->post('/tambahDataUser', 'C_User@inputdata');
         $router->post('/tambahDataAbsensiLevel', 'C_Absensi_Level@inputdata');
-        
+        $router->post('/tambahDataCompany', 'C_Company@inputdata');
         $router->post('/tambahDataBranch', 'C_Branch@inputdata');
         $router->post('/tambahDataDepartement', 'C_Departement@inputdata');
         $router->put('/updateDataAbsensi/{id_absensi}','C_Absensi@update');

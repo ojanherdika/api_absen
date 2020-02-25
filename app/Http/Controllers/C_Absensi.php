@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Absensi_Level;
 use App\Models\Absensi;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
-use Ramsey\Uuid\Uuid;
 use Illuminate\Http\Request;
 
 class C_Absensi extends Controller
@@ -36,7 +34,6 @@ class C_Absensi extends Controller
             // 'late_reason'=> 'required',
             // 'leave_reason'=> 'required',
         ]);
-        // $cek = Absensi::select('checkin_time')->where('checkin_time','=',$request->checkin_time)->first();
         $cek = Carbon::now()->format('H:i:s');
         
         if($cek<="08:00:00"){

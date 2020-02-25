@@ -10,4 +10,5 @@ class Gender extends Model
     protected $table = 'gender';
     protected $fillable = ['id_gender','gender_description'];
     public $incrementing = false;
+    public $timestamps = false;
 }
