@@ -15,6 +15,8 @@ class Absensi extends Migration
     {
         Schema::create('absensi', function (Blueprint $table) {
             $table->uuid('id_absensi')->primary();
+            $table->string('id_karyawan')->nullable();
+            $table->string('id_user')->nullable();
             $table->date('checkin_date')->nullable();
             $table->time('checkin_time')->nullable();
             $table->date('check_out_date')->nullable();

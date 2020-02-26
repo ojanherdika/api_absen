@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Absensi;
+use App\Models\Karyawan;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -51,8 +52,14 @@ class C_Absensi extends Controller
             'late_reason'=>'required'
             ]);
         }
+        $naon=Karyawan::find($request->get('id_karyawan'))->user;
+        // dd($naon->id_user);
+        // dd($request->get('id_karyawan'));
+        // exit;
         $inputan = Absensi::create([
             'id_absensi'=>Str::uuid()->toString('id_absensi'),
+            'id_karyawan'=>$request->get('id_karyawan'),
+            'id_user'=>$naon->id_user,
             'checkin_date'=> Carbon::now()->toDateString('checkin_date'), 
             'checkin_time'=> Carbon::now()->format('H:i:s'),
             'lattitude'=> $request->get('lattitude'),
