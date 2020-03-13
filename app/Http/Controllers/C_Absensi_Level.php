@@ -19,7 +19,8 @@ class C_Absensi_Level extends Controller
 
         return [
             'data'=> $data
-        ];}
+        ];
+    }
 
     public function inputdata(Request $request) {
         $this->validate($request, [

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\JWTAuth;
+
 
 class AuthController extends Controller
 {
@@ -29,6 +31,13 @@ class AuthController extends Controller
         if (! $token = $this->jwt->attempt($request->only('username', 'password'))) {
             return response()->json(['user_not_found'], 404);
         }
-        return response()->json(['status'=>'success','code'=>200,'result'=>compact('token')]);
+        $data=User::where('username','=',$request->username)->first();
+        $result['data']=$data;
+        return response()->json([
+            'status'=>'success',
+            'code'=>200,
+            'auth'=>compact('token'),
+            'result'=>$result
+        ]);
     }
 }

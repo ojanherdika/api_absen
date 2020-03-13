@@ -37,16 +37,16 @@ class C_Absensi extends Controller
         ]);
         $cek = Carbon::now()->format('H:i:s');
         
-        if($cek<="08:00:00"){
+        if($cek<='08:00:00'){
             $input = 1;
         }
-        else if($cek>='08:00:00' && $cek<='08:30:00'){
+        else if($cek>'08:00:00' && $cek<='08:30:00'){
             $input =2;
         }
-        else if($cek>='08:30:00'&& $cek<='09:00:00'){
+        else if($cek>'08:30:00'&& $cek<='09:00:00'){
             $input = 3;
         }
-        else if($cek>='09:00:00'){
+        else if($cek>'09:00:00'){
             $input = 4;
             $this->validate($request, [
             'late_reason'=>'required'
@@ -55,7 +55,7 @@ class C_Absensi extends Controller
         $naon=Karyawan::find($request->get('id_karyawan'))->user;
         // dd($naon->id_user);
         // dd($request->get('id_karyawan'));
-        // exit;
+        //  exit;
         $inputan = Absensi::create([
             'id_absensi'=>Str::uuid()->toString('id_absensi'),
             'id_karyawan'=>$request->get('id_karyawan'),

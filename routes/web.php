@@ -40,11 +40,13 @@ $router->delete('/deleteDataSkill/{id_skill}','C_Skill@delete');
 $router->delete('/deleteDataReligion/{id_religion}','C_Religion@delete');
 $router->delete('/deleteDataMartial/{id_martial}','C_Martial@delete');
 $router->delete('/deleteDataGender/{id_gender}','C_Gender@delete');
+$router->get('/viewDataAbsensi/{id_absensi}','C_Absensi@view');
+
 $router->group(
     ['middleware' => 'auth'], 
     function() use ($router) {
         $router->get('/viewsDataAbsensi','C_Absensi@index');
-        $router->get('/viewDataAbsensi/{id_absensi}','C_Absensi@view');
+        
         $router->get('/viewsDataCompany','C_Company@index');
         $router->get('/viewsDataBranch','C_Branch@index');
         $router->get('/viewsDataDepartement','C_Departement@index');
